@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo `sudo hciconfig hci0 down`
+echo `sudo hciconfig hci0 up`
+echo `sudo hciconfig hci0 noscan`
+
 usage() {
     echo "./sensorTag.sh <MAC Address> > <Hex-Dump Filename>"
     exit 1
@@ -7,4 +11,6 @@ usage() {
 
 [[ $# -ne 1 ]] && usage
 
-./run_gatttool.sh $1 | gawk '{ print system("date +%s%N | cut -b1-13"), $0; }'
+echo "starting run_gatttool.sh"
+
+./run_gatttool.sh $1 | gawk '{ print system("date"), $0; }'

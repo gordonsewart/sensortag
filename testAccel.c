@@ -33,12 +33,9 @@ int main(int argc, char **argv) {
 	char filename[200];
 
 	filename[0] = 0;
-	strcat(filename, "/home/optimus-prime/DR-SensorTag-v2/accel_");
+	strcat(filename, "/home/pi/sensortag/accel_");
 	strcat(filename, argv[argc-1]);
 	fp = fopen(filename, "a+");
-
-	//fp = fopen("/home/optimus-prime/DR-SensorTag/op.txt", "a+");
-	
 
 	sscanf(argv[2], "%x", &hex1);
 	sscanf(argv[3], "%x", &hex2);
@@ -48,8 +45,8 @@ int main(int argc, char **argv) {
 	hexY = (int8)(hex2);
 	hexZ = (int8)(hex3);
 
-	// Swapping X to Y bcoz the data shown on Ipad is exactly swapped between
-	// X and Y. Conforming to the data shown on Ipad as correct.
+	// Swapping X to Y because the data shown on iPad is exactly swapped between
+	// X and Y. Conforming to the data shown on iPad as correct.
 	X = calcAccel(hexY); // the swap X --> hexY
 	Y = calcAccel(hexX);
 	Z = calcAccel(-1*hexZ);
@@ -61,5 +58,4 @@ int main(int argc, char **argv) {
 	fprintf(fp, "%3.2f \n", Z);
 	//fprintf(fp, "\n---------------------------------------------------------\n");
 	fclose(fp);
-       
 }

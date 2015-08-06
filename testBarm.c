@@ -91,7 +91,7 @@ double TcalcBarPress(uint16 rawT)
   o += (val >> 3);
   val = (int64)c8 * Tr * Tr;
   o += (val >> 19);
-  
+
   // Pressure (Pa)
   pres = ((int64)(s * Pr) + o) >> 14;
 
@@ -121,23 +121,20 @@ int main(int argc, char **argv) {
 	char filename[200];
 
 	filename[0] = 0;
-	strcat(filename, "/home/optimus-prime/DR-SensorTag/");
+	strcat(filename, "/home/pi/sensortag/barm_");
 	strcat(filename, argv[argc-1]);
 	fp = fopen(filename, "a+");
 
-	//fp = fopen("/home/optimus-prime/DR-SensorTag/op.txt", "a+");
-
-
 	for(i=0;i<20;i++) {
-		sscanf(argv[i+1], "%x", &inp);		
+		sscanf(argv[i+1], "%x", &inp);
 		pData[i] = (uint8)inp;
 	}
-	
+
 	rawTemp = BUILD_UINT16(pData[16], pData[17]);
 	rawPress = BUILD_UINT16(pData[18], pData[19]);
 
 	storeCalibrationData(pData);
-	
+
 	fprintf(fp, "\n---------------------------------------------------------");
 	fprintf(fp, "\nBarometer Data [%ld]", getinstanttime());
 	fprintf(fp, "\nBarometric Temp : %3.2f", calcBarTmp(rawTemp));

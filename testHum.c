@@ -50,21 +50,21 @@ int main(int argc, char **argv) {
 	uint16 hexTemp;
 	uint16 hexHum;
 	uint8 pData[4];
-	
+
 	int inp, i;
 	FILE *fp;
 
 	char filename[200];
 
 	filename[0] = 0;
-	strcat(filename, "/home/optimus-prime/DR-SensorTag-v2/hum_");
+	strcat(filename, "/home/pi/sensortag/hum_");
 	strcat(filename, argv[argc-1]);
 	fp = fopen(filename, "a+");
 
 
 	int j=0;
 	for(i=2;i<6;i++,j++) {
-		sscanf(argv[i], "%x", &inp);		
+		sscanf(argv[i], "%x", &inp);
 		pData[j] = (uint8)inp;
 	}
 
@@ -75,5 +75,4 @@ int main(int argc, char **argv) {
 	fprintf(fp, "%3.2f , ", calcHumTmp(hexTemp));
 	fprintf(fp, "%3.2f \n", calcHumRel(hexHum));
 	fclose(fp);
-
 }

@@ -12,14 +12,14 @@ long getinstanttime()
 }
 
 int main(int argc, char **argv) {
-	
+
 	FILE *fp;
 	char filename[200];
 	int i;
 
 	printf("Inside dumphex ----- > \n\n\n\n");
 	filename[0] = 0;
-	strcat(filename, "/home/optimus-prime/DR-SensorTag-newDesign/");
+	strcat(filename, "/home/pi/sensortag/");
 	strcat(filename, argv[argc-1]);
 	fp = fopen(filename, "a+");
 

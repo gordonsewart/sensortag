@@ -41,14 +41,14 @@ int main(int argc, char **argv) {
 	char filename[200];
 
 	filename[0] = 0;
-	strcat(filename, "/home/optimus-prime/DR-SensorTag-v2/gyro_");
+	strcat(filename, "/home/pi/sensortag/gyro_");
 	strcat(filename, argv[argc-1]);
 
 	fp = fopen(filename, "a+");
 
 	int j=0;
 	for(i=2;i<8;i++,j++) {
-		sscanf(argv[i], "%x", &inp);		
+		sscanf(argv[i], "%x", &inp);
 		pData[j] = (int8)inp;
 	}
 

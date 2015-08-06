@@ -56,30 +56,28 @@ double calcTmpTarget(uint16 rawT)
 
  #define BUILD_UINT16(loByte, hiByte) ((uint16)(((loByte) & 0x00FF) + (((hiByte) & 0x00FF) << 8)))
 
- 
+
 int main(int argc, char **argv) {
 	uint16 hexObj;
 	uint16 hexAmb;
-	uint8 pData[4]; 
+	uint8 pData[4];
 	int inp, i;
 	FILE *fp;
 	char filename[200];
 
 	filename[0] = 0;
-	strcat(filename, "/home/optimus-prime/DR-SensorTag-v2/temp_");
+	strcat(filename, "/home/pi/sensortag/temp_");
 	strcat(filename, argv[argc-1]);
 	fp = fopen(filename, "a+");
 
 	printf("Got data %s\n", filename);
 	int j=0;
 	for(i=2;i<6;i++, j++) {
-		sscanf(argv[i], "%x", &inp);		
+		sscanf(argv[i], "%x", &inp);
 		pData[j] = (uint8)inp;
 		printf("%s ", argv[i]);
 		printf("pData : %d", pData[j]);
 	}
-	
-	
 
 	hexObj = BUILD_UINT16(pData[0], pData[1]);
 	hexAmb = BUILD_UINT16(pData[2], pData[3]);
